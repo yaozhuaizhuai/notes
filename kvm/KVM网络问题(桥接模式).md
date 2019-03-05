@@ -30,6 +30,30 @@
 检查网桥的状态（命令参考brctl show）
 如果虚拟机启动之后生成的那些虚拟机网卡设备vnetX没有附在网桥上，使用命令brctl addif 网桥(br0) vnetX(虚拟机设备) 将目前启动的2个虚拟机的网卡附着在网桥上.
 ````
+## 检查其他
+````
+上述排查如果均无结果，就要考虑是不是安装了其他软件，导致网络上面的冲突。
+````
+### 案例一：安装docker带来的网络不通问题
+````
+解析：安装完docker之后，会默认生成网桥docker0，而docker0的网段和局域网网段有时候会出现冲突。
+解决：
+// 删除原有配置
+[root@localhost /]# service docker stop  
+[root@localhost /]# ip link set dev docker0 down
+[root@localhost /]# brctl delbr docker0
+[root@localhost /]# iptables -t nat -F POSTROUTING
+// 创建新网桥
+[root@localhost /]# brctl addbr docker0
+[root@localhost /]# ip addr add 192.168.2.1/24 dev docker0
+[root@localhost /]# ip link set dev docker0 up
+// 配置docker文件
+[root@localhost /]# vi /etc/docker/daemon.json
+{
+  "bip": "192.168.2.1/24"
+}
+[root@localhost /]# systemctl restart docker
+````
 # 参考
 ````
 brctl show 查看网桥
