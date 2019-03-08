@@ -1,5 +1,5 @@
-CentOS安装Maven
-===============
+# CentOS安装Maven
+---
 ## 1.将下载的压缩文件解压
 ```
 [root@k8s-master ~]# cd /data/package
