@@ -1,12 +1,14 @@
-# 简述
+# synchronized
+---
+## 简述
 ```
 synchronized：
 - 可以保证变量的原子性，可见性和顺序性
 - 可以保证方法或者代码块在运行时只有一个方法可以进入临界区获取资源
 - 可以保证内存变量的内存可见性
 ```
-# 原理
-## 修饰方法
+## 原理
+### 修饰方法
 ```
 public synchronized void syncTask(){
   System.out.println("测试");
@@ -16,7 +18,7 @@ public synchronized void syncTask(){
 ```
 由字节码可以看出，JVM是通过编译之后的标志位ACC_SYNCHRONIZED来识别是否使用了synchronized
 ```
-## 修饰静态方法
+### 修饰静态方法
 ```
 public static synchronized void syncTask(){
   System.out.println("测试");
@@ -26,7 +28,7 @@ public static synchronized void syncTask(){
 ```
 你会发现字节码中除了多了一个标识ACC_STATIC，其余都与上一案例一致，当然结论也就是一致的了
 ```
-## 修饰代码块
+### 修饰代码块
 ```
 public void syncTask(){
  synchronized (this){
