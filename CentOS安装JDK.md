@@ -1,5 +1,5 @@
-CentOS安装JDK
-=================
+# CentOS安装JDK
+---
 ## 1.卸载CentOS原本自带的OpenJDK
 ```
 [root@k8s-master ~]# rpm -qa | grep java
