@@ -10,4 +10,4 @@
 n * Endpoint ---> n * acceptor ---> n * (m * processors)
 这个里面Endpoint，对应主机网卡个数
 ````
-## 事物问题
+## 事务问题
