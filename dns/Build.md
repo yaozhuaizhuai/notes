@@ -18,4 +18,7 @@ OS：CentOS Linux release 7.5.1804 (Core)
 [root@linux200 ~]# rpm -ql bind
 
 ## 4.配置
+[root@linux200 ~]# cp /etc/named.conf{,.bak}
+
+[root@linux200 ~]# vim /etc/named.conf
 
