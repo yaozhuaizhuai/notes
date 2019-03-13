@@ -18,9 +18,9 @@ OS：CentOS Linux release 7.5.1804 (Core)
 [root@linux200 ~]# rpm -ql bind
 
 ## 4.配置
-[root@linux200 ~]# cp /etc/named.conf{,.bak}
+[root@linux200 ~]# cp /etc/named.conf{,.bak} //备份文件
 
-[root@linux200 ~]# vi /etc/named.conf
+[root@linux200 ~]# vi /etc/named.conf //修改配置
 ```
 options {
     listen-on port 53 { 172.19.100.230; };   
@@ -69,3 +69,5 @@ ns7.baidu.com.		172799	IN	A	180.76.76.92
 ;; WHEN: Wed Mar 13 17:53:47 CST 2019
 ;; MSG SIZE  rcvd: 240
 ```
+## 5.搭建内网DNS服务器
+让当前的DNS解析kangyuan802.com域名
