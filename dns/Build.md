@@ -18,7 +18,17 @@ OS：CentOS Linux release 7.5.1804 (Core)
 [root@linux200 ~]# rpm -ql bind
 
 ## 4.配置
-[root@linux200 ~]# cp /etc/named.conf{,.bak}
+[root@linux200 ~]# cp /etc/named.conf{,.bak} // 备份文件
 
-[root@linux200 ~]# vim /etc/named.conf
+[root@linux200 ~]# vi /etc/named.conf //修改配置
+```
+options {
+    listen-on port 53 { 172.19.100.230; };   
+         ....
+    allow-query     { localhost;any; };   //允许DNS查询客户端
+         ...
+}
+```
+[root@dns-server ~]# named-checkconf /etc/named.conf //检查配置
 
+[root@dns-server ~]# systemctl start named 
