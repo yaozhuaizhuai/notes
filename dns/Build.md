@@ -71,3 +71,33 @@ ns7.baidu.com.		172799	IN	A	180.76.76.92
 ```
 ## 5.搭建内网DNS服务器
 让当前的DNS解析kangyuan802.com域名
+[root@linux200 ~]# vi /etc/named.rfc1912.zones
+```
+...
+
+zone "kangyuan802.com" IN {
+	type master;
+	file "kangyuan.com.zone"
+};
+```
+[root@linux200 ~]# cd /var/named/
+
+[root@linux230 named]# cp -av named.localhost qipai.com.zone
+
+[root@linux230 named]# vi kangyuan.com.zone
+```
+@	IN SOA	@ kangyuan.top. (
+					30	; serial
+					1M	; refresh
+					1M	; retry
+					1M	; expire
+					3M )	; minimum
+	NS	@
+	A	172.19.100.230
+```
+[root@linux230 named]# named-checkzone kangyuan.com kangyuan.com.zone
+
+[root@linux230 named]# systemctl restart named
+
+[root@linux230 named]# dig kangyuan.com @172.19.100.230 
+
