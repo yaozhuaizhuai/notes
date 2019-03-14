@@ -82,7 +82,7 @@ zone "kangyuan.com" IN {
 ```
 [root@linux200 ~]# cd /var/named/
 
-[root@linux230 named]# cp -av named.localhost dev.kangyuan802.com.zone
+[root@linux230 named]# cp -av named.localhost kangyuan.com.zone
 
 [root@linux230 named]# vi kangyuan.com.zone
 ```
