@@ -75,7 +75,7 @@ ns7.baidu.com.		172799	IN	A	180.76.76.92
 ```
 ...
 
-zone "dev.kangyuan.com" IN {
+zone "kangyuan.com" IN {
 	type master;
 	file "kangyuan.com"
 };
@@ -86,12 +86,12 @@ zone "dev.kangyuan.com" IN {
 
 [root@linux230 named]# vi kangyuan.com.zone
 ```
-@	IN SOA	@ kangyuan.top. (
-					30	; serial
-					1M	; refresh
-					1M	; retry
+@	IN SOA	@ kangyuan.com. (
+					201903014	; serial
+					1D	; refresh
+					1H	; retry
 					1M	; expire
-					3M )	; minimum
+					3H )	; minimum
 	NS	@
 dev	A	172.19.100.230
 ```
