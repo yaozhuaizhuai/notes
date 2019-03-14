@@ -70,34 +70,34 @@ ns7.baidu.com.		172799	IN	A	180.76.76.92
 ;; MSG SIZE  rcvd: 240
 ```
 ## 5.搭建内网DNS服务器
-让当前的DNS解析kangyuan802.com域名
+让当前的DNS解析kangyuan.com域名
 [root@linux200 ~]# vi /etc/named.rfc1912.zones
 ```
 ...
 
-zone "dev.kangyuan802.com" IN {
+zone "dev.kangyuan.com" IN {
 	type master;
-	file "dev.kangyuan802.com"
+	file "kangyuan.com"
 };
 ```
 [root@linux200 ~]# cd /var/named/
 
 [root@linux230 named]# cp -av named.localhost dev.kangyuan802.com.zone
 
-[root@linux230 named]# vi dev.kangyuan802.com.zone
+[root@linux230 named]# vi kangyuan.com.zone
 ```
-@	IN SOA	@ dev.kangyuan802.top. (
+@	IN SOA	@ kangyuan.top. (
 					30	; serial
 					1M	; refresh
 					1M	; retry
 					1M	; expire
 					3M )	; minimum
 	NS	@
-	A	172.19.100.230
+dev	A	172.19.100.230
 ```
-[root@linux230 named]# named-checkzone dev.kangyuan802.com dev.kangyuan802.com.zone
+[root@linux230 named]# named-checkzone kangyuan.com kangyuan.com.zone
 
 [root@linux230 named]# systemctl restart named
 
-[root@linux230 named]# dig dev.kangyuan802.com @172.19.100.230 
+[root@linux230 named]# dig kangyuan.com @172.19.100.230 
 
