@@ -86,14 +86,15 @@ zone "kangyuan.com" IN {
 
 [root@linux230 named]# vi kangyuan.com.zone
 ```
-@	IN SOA	@ kangyuan.com. (
+@   IN SOA	@ kangyuan.com. (
 					201903014	; serial
 					1D	; refresh
 					1H	; retry
 					1M	; expire
 					3H )	; minimum
-	NS	@
-dev	A	172.19.100.230
+    IN  NS	@
+    IN	A       
+dev IN	A	172.19.100.230
 ```
 [root@linux230 named]# named-checkzone kangyuan.com kangyuan.com.zone
 
