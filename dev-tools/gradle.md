@@ -1,7 +1,7 @@
 # gradle
 https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
-## 1.wrapper
+## wrapper
 The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary.
 
 **benefits:**
