@@ -7,7 +7,7 @@ The Wrapper is a script that invokes a declared version of Gradle, downloading i
 **benefits:**
 * Standardizes a project on a given Gradle version, leading to more reliable and robust builds.
 * Provisioning a new Gradle version to different users and execution environment is as simple as changing the Wrapper definition.
-## Adding Wrapper
+### Adding Wrapper
 Generating the Wrapper files requires an installed version of the Gradle runtime on your machine as described in Installation. Thankfully, generating the initial Wrapper files is a one-time process.
 
 **Running the Wrapper task**
@@ -19,10 +19,10 @@ options:
 --gradle-distribution-url 
 --gradle-distribution-sha256-sum
 ``` 
-## Upgrading Wrapper
+### Upgrading Wrapper
 * upgrade the Gradle version is manually change the distributionUrl property in the Wrapper property file.
 * run the wrapper task and provide the target Gradle version as described in Adding the Gradle Wrapper. 
-## Using Wrapper
+### Using Wrapper
 Depending on the operating system you either run gradlew or gradlew.bat instead of the gradle command. The following console output demonstrate the use of the Wrapper on a Windows machine for a Java-based project.
 
 **Executing the build with the Wrapper batch file**
