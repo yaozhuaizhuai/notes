@@ -40,7 +40,7 @@
 }
 [root@localhost /]# systemctl restart docker
 ````
-# 参考
+# 附录
 ````
 brctl show 查看网桥
 ````
