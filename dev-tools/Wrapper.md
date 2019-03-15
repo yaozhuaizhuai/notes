@@ -1,8 +1,7 @@
-# Gradle
-https://docs.gradle.org/current/userguide/gradle_wrapper.html
+# Wrapper
+gradle wrapper: https://docs.gradle.org/current/userguide/gradle_wrapper.html
 
-## Wrapper
-The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary.
+The Wrapper is a script that invokes a declared version of Gradle or Maven, downloading it beforehand if necessary.
 
 **benefits:**
 * Standardizes a project on a given Gradle version, leading to more reliable and robust builds.
