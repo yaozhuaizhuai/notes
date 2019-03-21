@@ -7,7 +7,9 @@
 ## ReentrantLock
 
 **重入性**
+
 **独占性**
+
 **支持公平和非公平获取锁**
 
 ## ReentrantReadWriteLock
