@@ -18,10 +18,10 @@
 ## ReentrantReadWriteLock
 （1）重入性
 
-（2）还允许从写入锁降级为读取锁，其实现方式是：先获取写入锁，然后获取读取锁，最后释放写入锁。但是，从读取锁升级到写入锁是不允许的
+（2）允许从写锁降级为读锁，但不允许从读锁升级到写锁
 
 （3）读取锁和写入锁都支持锁获取期间的中断
 
 （4）支持公平和非公平的获取锁
 
-（5）Condition支持。仅写入锁提供了一个 Conditon 实现；读取锁不支持 Conditon ，readLock().newCondition() 会抛出异常
+（5）Condition支持（仅写锁提供了Conditon实现而读取锁不支持Conditon）
