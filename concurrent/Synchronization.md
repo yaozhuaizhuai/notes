@@ -25,3 +25,5 @@ public void syncTask(){
 }
 ```
 ![](https://agam-blog-image.oss-cn-hangzhou.aliyuncs.com/e4e6f5949498d2206ad3064656190c2174a.jpg)
+## refer
+https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html#jls-17.1
