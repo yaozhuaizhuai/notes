@@ -1,4 +1,4 @@
-# synchronized
+# Synchronized
 ---
 ## 简述
 ```
