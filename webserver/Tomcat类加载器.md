@@ -7,5 +7,6 @@
 * 放置在/shared目录中：类库可被所有web应用可见，对Tomcat不可见
 * 放置在/webapp/WEB-INF目录中：类库仅仅可以被此web应用使用，对Tomcat和其他web应用不可见
 
-为了支持这套目录结构，并对目录里面的类进行加载和隔离，Tomcat自定义了多个类加载器，这些类加载器按照经典的双亲委派模型来实现，其关系如下：
-![](https://github.com/c-agam/notes/blob/master/images/Tomcat%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png）
+为了支持这套目录结构，并对目录里面的类进行加载和隔离，Tomcat自定义了多个类加载器，这些类加载器按照经典的双亲委派模型来实现，其关系如下:
+
+![](https://github.com/c-agam/notes/blob/master/images/Tomcat%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png)
