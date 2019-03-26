@@ -1,6 +1,8 @@
-# Memory Model
+# 内存模型
 ---
-A memory model describes, given a program and an execution trace of that program, whether the execution trace is a legal execution of the 
-program. The Java programming language memory model works by examining each read in an execution trace and checking that the write observed by that read is valid according to certain rules.
+Java虚拟机规范中试图定义一种Java内存模型(JMM)来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。在此之前，主流程序语言（如 C 或 C++）等直接使用物理硬件和操作系统的内存模型，因此，会由于在不同平台上内存模型的差异，有可能导致程序在一套平台上并发完全正常
+，而在另外一套平台上并发访问经常出错，因此在某些场景就必须针对不同的平台来编写程序。
+
+定义Java内存模型并非一件容易的事情，这个模型必须定义得足够严谨，才能让Java的并发内存访问操作不会产生歧义。但是，也必须定义足够宽松，使得Java虚拟机的实现有足够的自有空间去利用硬件的各种特性（寄存器，高速缓存和指令集中某些特有的指令）来获取更好的执行速度。经过长时间的验证和修补，在JDK1.5（JSR-133）发布后，Java内存模型已经成熟和完善起来了。
 ## refer
 https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html#jls-17.4
