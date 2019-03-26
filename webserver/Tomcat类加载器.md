@@ -10,3 +10,5 @@
 为了支持这套目录结构，并对目录里面的类进行加载和隔离，Tomcat自定义了多个类加载器，这些类加载器按照经典的双亲委派模型来实现，其关系如下:
 
 ![](https://github.com/c-agam/notes/blob/master/images/Tomcat%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png)
+
+对于Tomcat 6.x之后的版本，只有指定了tomcat/conf/catalina.properties配置文件的server.loader和share.loader项后才会真正建立CatalinaClassLoader和SharedClassLoader的实例。
