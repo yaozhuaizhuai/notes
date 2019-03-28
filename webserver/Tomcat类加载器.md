@@ -11,4 +11,11 @@
 
 ![](https://github.com/c-agam/notes/blob/master/images/Tomcat%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8.png)
 
+
+ 上述关系中，要特别注意的是：WebAppClassLoader这个类加载器，它的加载流程是有条件执行双亲委派模型。换句话说：有的时候按照双亲委派模型来执行，有的时候不按照双亲委派模型来执行。实现代码片段如下：
+
+
+
+
 对于Tomcat 6.x之后的版本，只有指定了tomcat/conf/catalina.properties配置文件的server.loader和share.loader项后才会真正建立CatalinaClassLoader和SharedClassLoader的实例。
+
