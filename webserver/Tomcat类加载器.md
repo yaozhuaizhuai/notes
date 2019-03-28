@@ -13,7 +13,8 @@
 
 
  上述关系中，要特别注意的是：WebAppClassLoader这个类加载器，它的加载流程是有条件执行双亲委派模型。换句话说：有的时候按照双亲委派模型来执行，有的时候不按照双亲委派模型来执行。实现代码片段如下：
-
+ 
+![](https://github.com/c-agam/notes/blob/master/images/WebAppClassLoaderBase.png)
 
 
 
