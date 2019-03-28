@@ -17,6 +17,3 @@
 ![](https://github.com/c-agam/notes/blob/master/images/WebAppClassLoaderBase.png)
 
 
-
-对于Tomcat 6.x之后的版本，只有指定了tomcat/conf/catalina.properties配置文件的server.loader和share.loader项后才会真正建立CatalinaClassLoader和SharedClassLoader的实例。
-
