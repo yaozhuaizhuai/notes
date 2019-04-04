@@ -50,3 +50,5 @@ RIGHT-ROTATE(T, y)
  right[x] ← y            
  p[y] ← x               
 ```
+## 五、参考
+https://www.cnblogs.com/skywang12345/p/3245399.html
