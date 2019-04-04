@@ -8,3 +8,7 @@
 **2、时间复杂度：** O(lgn)
 
 **3、左旋**
+
+![](https://github.com/c-agam/notes/blob/master/images/%E5%B7%A6%E6%97%8B.png)
+
+对x进行左旋，意味着"将x变成一个左节点"
