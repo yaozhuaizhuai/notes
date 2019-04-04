@@ -1,15 +1,15 @@
 # 红黑树
 ---
-## 一、特性
+## 1、特性
 * 每个节点非红即黑
 * 根节点是黑色
 * 每个叶子节点（Nil）是黑色
 * 如果一个节点是红色，则它的子节点必须是黑色
 * 从一个节点到该节点的子孙节点的所有路径上包含相同数目的黑色节点
 
-## 二、时间复杂度：O(lgn)
+## 2、时间复杂度：O(lgn)
 
-## 三、左旋
+## 3、左旋
 ![](https://github.com/c-agam/notes/blob/master/images/%E5%B7%A6%E6%97%8B.png)
 
 **对x进行左旋，意味着将x变成一个左节点**
@@ -30,7 +30,7 @@ LEFT-ROTATE(T, x)
  p[x] ← y                
 ```
 
-## 四、右旋
+## 4、右旋
 ![](https://github.com/c-agam/notes/blob/master/images/%E5%8F%B3%E6%97%8B.png)
 
 **对节点Y右旋，意味着将Y变成右节点**
@@ -50,5 +50,5 @@ RIGHT-ROTATE(T, y)
  right[x] ← y            
  p[y] ← x               
 ```
-## 五、参考
+## 5、参考
 https://www.cnblogs.com/skywang12345/p/3245399.html
