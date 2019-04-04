@@ -13,9 +13,9 @@
 
 ![](https://github.com/c-agam/notes/blob/master/images/%E5%B7%A6%E6%97%8B.png)
 
-对x进行左旋，意味着"将x变成一个左节点"
+**对x进行左旋，意味着"将x变成一个左节点"**
 
-伪代码
+**伪代码**
 ```
 LEFT-ROTATE(T, x)  
  y ← right[x]            
