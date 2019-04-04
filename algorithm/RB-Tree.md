@@ -10,12 +10,11 @@
 ## 二、时间复杂度：O(lgn)
 
 ## 三、左旋
-
 ![](https://github.com/c-agam/notes/blob/master/images/%E5%B7%A6%E6%97%8B.png)
 
-**对x进行左旋，意味着"将x变成一个左节点"**
+**对x进行左旋，意味着将x变成一个左节点**
 
-**伪代码**
+**伪代码：**
 ```
 LEFT-ROTATE(T, x)  
  y ← right[x]            
@@ -29,4 +28,25 @@ LEFT-ROTATE(T, x)
            else right[p[x]] ← y   
  left[y] ← x             
  p[x] ← y                
+```
+
+## 四、右旋
+![](https://github.com/c-agam/notes/blob/master/images/%E5%8F%B3%E6%97%8B.png)
+
+**对节点Y右旋，意味着将Y变成右节点**
+
+**伪代码：**
+```
+RIGHT-ROTATE(T, y)  
+ x ← left[y]             
+ left[y] ← right[x]      
+ p[right[x]] ← y         
+ p[x] ← p[y]             
+ if p[y] = nil[T]       
+ then root[T] ← x                 
+ else if y = right[p[y]]  
+           then right[p[y]] ← x   
+           else left[p[y]] ← x    
+ right[x] ← y            
+ p[y] ← x               
 ```
