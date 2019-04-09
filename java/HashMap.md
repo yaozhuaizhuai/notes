@@ -38,6 +38,6 @@ HashMap使用链接法（拉链法）来解决Hash冲突问题，使用红黑树
 * 线程安全性：HashTable 安全
 * 效率不同：HashTable 要慢，因为加锁
 
-**7、附录**
+**8、附录**
 
 [参考](http://www.importnew.com/31278.html)
