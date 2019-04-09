@@ -14,7 +14,7 @@ static final int hash(Object key) {
 //获取下标
 (n-1) & hash
 ```
-**3、如何解决Hash冲突**
+**3、如何解决Hash碰撞**
 
 HashMap使用链接法（拉链法）来解决Hash冲突问题，使用红黑树来解决链表过深问题。
 
@@ -25,3 +25,11 @@ HashMap使用链接法（拉链法）来解决Hash冲突问题，使用红黑树
 **5、为什么不一直使用红黑树？**
 
 红黑树属于平衡二叉树，为了保持“平衡”是需要付出代价的，如果链表长度很短的话，根本不需要引入红黑树，引入反而会慢。
+
+**6、什么是红黑树？**
+
+[RB-Tree](https://github.com/c-agam/notes/blob/master/algorithm/RB-Tree.md)
+
+**7、附录**
+
+[HashMap](http://www.importnew.com/31278.html)
