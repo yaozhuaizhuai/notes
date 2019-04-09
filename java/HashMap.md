@@ -28,8 +28,8 @@ HashMap使用链接法（拉链法）来解决Hash冲突问题，使用红黑树
 
 **6、什么是红黑树？**
 
-[RB-Tree](https://github.com/c-agam/notes/blob/master/algorithm/RB-Tree.md)
+[红黑树](https://github.com/c-agam/notes/blob/master/algorithm/RB-Tree.md)
 
 **7、附录**
 
-[HashMap](http://www.importnew.com/31278.html)
+[参考](http://www.importnew.com/31278.html)
