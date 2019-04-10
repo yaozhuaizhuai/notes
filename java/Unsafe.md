@@ -33,7 +33,7 @@ java -Xbootclasspath/a: ${path}   // 其中path为调用Unsafe相关方法的类
 ## 2、功能介绍
 ### 内存操作
 这部分主要包含堆外内存的分配、拷贝、释放、给定地址值操作等方法。
-![]()
+![](https://github.com/c-agam/notes/blob/master/images/unsafe-mp.png)
 
 通常，我们在Java中创建的对象都处于堆内内存（heap）中，堆内内存是由JVM所管控的Java进程内存，并且它们遵循JVM的内存管理机制，JVM会采用垃圾回收机制统一管理堆内存。与之相对的是堆外内存，存在于JVM管控之外的内存区域，Java中对堆外内存的操作，依赖于Unsafe提供的操作堆外内存的native方法
 
