@@ -34,3 +34,5 @@ MSC与CLH最大的不同并不是链表是显示还是隐式，而是线程自�
 
 （5）Condition支持（仅写锁提供了Conditon实现而读取锁不支持Conditon）
 
+## 参考
+[CLH/MCS](https://www.cnblogs.com/llkmst/p/4895478.html)
