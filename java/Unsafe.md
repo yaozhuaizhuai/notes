@@ -53,5 +53,17 @@ Cleaner继承自Java四大引用类型之一的虚引用PhantomReference（众�
 
 所以当DirectByteBuffer仅被Cleaner引用（即为虚引用）时，其可以在任意GC时段被回收。当DirectByteBuffer实例对象被回收时，在Reference-Handler线程操作中，会调用Cleaner的clean方法根据创建Cleaner时传入的Deallocator来进行堆外内存的释放。
 
+### CAS
+如下源代码释义所示，这部分主要为CAS相关操作的方法。
+![](https://github.com/c-agam/notes/blob/master/images/CAS.png)
+
+什么是CAS? 即比较并替换，实现并发算法时常用到的一种技术。CAS操作包含三个操作数——内存位置、预期原值及新值。执行CAS操作的时候，将内存位置的值与预期原值比较，如果相匹配，那么处理器会自动将该位置值更新为新值，否则，处理器不做任何操作。我们都知道，CAS是一条CPU的原子指令（cmpxchg指令），不会造成所谓的数据不一致问题，Unsafe提供的CAS方法（如compareAndSwapXXX）底层实现即为CPU指令cmpxchg。
+
+**典型应用**
+
+CAS在java.util.concurrent.atomic相关类、Java AQS、CurrentHashMap等实现上有非常广泛的应用。如下图所示，AtomicInteger的实现中，静态字段valueOffset即为字段value的内存偏移地址，valueOffset的值在AtomicInteger初始化时，在静态代码块中通过Unsafe的objectFieldOffset方法获取。在AtomicInteger中提供的线程安全方法中，通过字段valueOffset的值可以定位到AtomicInteger对象中value的内存地址，从而可以根据CAS实现对value字段的原子操作。
+![](https://github.com/c-agam/notes/blob/master/images/Atomic.png)
+
+
 ## 三、附录
 http://mp.weixin.qq.com/s?__biz=MjM5NjQ5MTI5OA==&mid=2651750294&idx=3&sn=6d5c4fb07aad1809b05f0a02b5d56d66&chksm=bd12a6db8a652fcd1641462103ceb34f4aa607d61d2aaa7de63385d83a253ad28f22ffdd5fa9&mpshare=1&scene=23&srcid=03157BGpHg3OyQQAco3OSGJ0#rd
