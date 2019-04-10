@@ -55,7 +55,7 @@ Cleaner继承自Java四大引用类型之一的虚引用PhantomReference（众�
 
 所以当DirectByteBuffer仅被Cleaner引用（即为虚引用）时，其可以在任意GC时段被回收。当DirectByteBuffer实例对象被回收时，在Reference-Handler线程操作中，会调用Cleaner的clean方法根据创建Cleaner时传入的Deallocator来进行堆外内存的释放。
 
-### CAS
+### CAS相关
 如下源代码释义所示，这部分主要为CAS相关操作的方法。
 
 ![](https://github.com/c-agam/notes/blob/master/images/CAS.png)
@@ -67,6 +67,15 @@ Cleaner继承自Java四大引用类型之一的虚引用PhantomReference（众�
 CAS在java.util.concurrent.atomic相关类、Java AQS、CurrentHashMap等实现上有非常广泛的应用。如下图所示，AtomicInteger的实现中，静态字段valueOffset即为字段value的内存偏移地址，valueOffset的值在AtomicInteger初始化时，在静态代码块中通过Unsafe的objectFieldOffset方法获取。在AtomicInteger中提供的线程安全方法中，通过字段valueOffset的值可以定位到AtomicInteger对象中value的内存地址，从而可以根据CAS实现对value字段的原子操作。
 
 ![](https://github.com/c-agam/notes/blob/master/images/Atomic.png)
+
+### 线程调度
+这部分，包括线程挂起、恢复、锁机制等方法。
+![](https://github.com/c-agam/notes/blob/master/images/thread-schedule.png)
+
+如上源码说明中，方法park、unpark即可实现线程的挂起与恢复，将一个线程进行挂起是通过park方法实现的，调用park方法后，线程将一直阻塞直到超时或者中断等条件出现；unpark可以终止一个挂起的线程，使其恢复正常。
+
+**典型应用**
+Java锁和同步器框架的核心类AbstractQueuedSynchronizer，就是通过调用LockSupport.park()和LockSupport.unpark()实现线程的阻塞和唤醒的，而LockSupport的park、unpark方法实际是调用Unsafe的park、unpark方式来实现。
 
 
 ## 三、附录
