@@ -1,4 +1,4 @@
-## 1、简介
+## 简介
 
 Java无法直接访问底层操作系统，而是通过本地方法来访问的。不过尽管如此，JVM还是开了一个后门，JDK中有一个类Unsafe，它提供了硬件级别的原子操作。
 
@@ -28,7 +28,7 @@ public class UnsafeDemo {
 java -Xbootclasspath/a: ${path}   // 其中path为调用Unsafe相关方法的类所在jar包路径 
 ```
 
-## 2、功能介绍
+## 功能介绍
 ### 内存操作
 这部分主要包含堆外内存的分配、拷贝、释放、给定地址值操作等方法。
 ![](https://github.com/c-agam/notes/blob/master/images/unsafe-mp.png)
