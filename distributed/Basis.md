@@ -2,7 +2,7 @@
 ---
 ## CAP
 CAP定理是由加州大学伯克利分校Eric Brewer教授提出来的，他指出WEB服务无法同时满足以下3个属性:
-* 一致性(Consistency):客户端知道一系列的操作都会同时发生(生效)
+* 一致性(Consistency):客户端知道一系列的操作都会同时发生
 * 可用性(Availability):每个操作都必须以可预期的响应结束
 * 分区容错性(Partition tolerance):即使出现单个组件无法可用,操作依然可以完成
 ## BASE
