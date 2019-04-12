@@ -88,5 +88,23 @@ final boolean acquireQueued(final Node node, int arg) {
 对于B来说，它的prev指向head-node，因此会首先再尝试获取锁一次，如果失败，则会将head-node的waitStatus值为SIGNAL，下次循环的时候再去尝试获取锁，如果还是失败，且这个时候prev节点的waitStatus已经是SIGNAL，则这个时候线程会被通过LockSupport挂起。
 
 **五、唤醒恢复**
+```
+//Releases in exclusive mode
+public final boolean release(int arg) {
+    if (tryRelease(arg)) {
+        Node h = head;
+        if (h != null && h.waitStatus != 0)
+            unparkSuccessor(h);
+        return true;
+    }
+    return false;
+}
+```
+Head-node的waitStatus为Node.SIGNAL，因此这个时候要通知队列中的等待线程，可以过来拿锁了，这也是unparkSuccessor做的事情：
+* 将队头的waitStatus设置为0
+* 找到离队头最近的没有被cancelled的那个结点，并设置它为head
+* 将找到的这个结点唤醒
 
+**六、羊群效应**
 
+这里说一下羊群效应，当有多个线程去竞争同一个锁的时候，假设锁被某个线程占用，那么如果有成千上万个线程在等待锁，有一种做法是同时唤醒这成千上万个线程去去竞争锁，这个时候就发生了羊群效应，海量的竞争必然造成资源的剧增和浪费，因此终究只能有一个线程竞争成功，其他线程还是要老老实实的回去等待。**AQS的FIFO的等待队列给解决在锁竞争方面的羊群效应问题提供了一个思路：保持一个FIFO队列，队列每个节点只关心其前一个节点的状态，线程唤醒也只唤醒队头等待线程。**
