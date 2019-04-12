@@ -1,4 +1,4 @@
-**1、特点**
+**1、特点1**
 * HashMap 是一个散列桶（数组和链表）
 * HashMap 是线程不安全的
 * HashMap 可以接受null键和值，而Hashtable则不能
