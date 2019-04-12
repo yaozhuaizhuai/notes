@@ -1,21 +1,21 @@
 **一、AQS？**
 
-AQS是JDK1.5提供的一个基于FIFO等待队列实现的一个用于实现同步器的基础框架，这个基础框架的重要性可以这么说，JCU包里面几乎所有的有关锁、多线程并发以及线程
-同步器等重要组件的实现都是基于AQS这个框架。AQS的核心思想是基于volatile int state这样的一个属性同时配合Unsafe工具对其原子性的操作来实现对当前锁的状态
-进行修改。当state的值为0的时候，标识该Lock不被任何线程所占有。
+AQS是JDK1.5提供的一个基于FIFO等待队列实现的一个用于实现同步器的基础框架，这个基础框架的重要性可以这么说，JCU包里面几乎所有的有关锁、多线程并发以及线程同步器等重要组件的实现都是基于AQS这个框架。AQS的核心思想是基于volatile int state这样的一个属性同时配合Unsafe工具对其原子性的操作来实现对当前锁的状态进行修改。当state的值为0的时候，标识该Lock不被任何线程所占有。
 
 **二、AQS队列**
 
 作为AQS的核心实现的一部分，举个例子来描述一下这个队列长什么样子：
 * 假设目前只有一个线程去竞争锁，此时队列为空，即head与tail均为NIL。
-* 假设只有线程A去竞争锁并且一直没有释放的情况，B与C依次去竞争锁，这样B与C线程会进入队列，如下所示：
+* 假设只有线程A获取到了锁并且一直没有释放，接着B与C依次去竞争锁，这样B与C线程会进入队列，如下所示：
 ![](https://github.com/c-agam/notes/blob/master/images/AQS-Queue.png)
 
 AQS的等待队列基于一个双向链表实现的，head结点不关联线程，后面两个节点分别关联B和C，他们将会按照先后顺序被串联在这个队列上。这个时候如果后面再有线程进来的话将会被当做队列的tail。
 
+**Tip：为了简化分析，下面章节所述都建立在“只有线程A获取到了锁并且一直没有释放，接着B与C依次去竞争锁”这个基础上**
+
 **三、入队列**
 
-我们依旧使用上述A，B，C线程的例子，从代码层面分析下入队列的过程
+从代码层面分析下入队列的过程
 ```
 // Acquires lock in exclusive mode,ignoring interrupts.
 public final void acquire(int arg) {
@@ -85,7 +85,7 @@ final boolean acquireQueued(final Node node, int arg) {
     }
 }
 ```
-我们依旧假设只有A，B，C三个线程并且A获取锁之后一直未释放，对于B来说，它的prev指向head-node，因此会首先再尝试获取锁一次，如果失败，则会将head-node的waitStatus值为SIGNAL，下次循环的时候再去尝试获取锁，如果还是失败，且这个时候prev节点的waitStatus已经是SIGNAL，则这个时候线程会被通过LockSupport挂起。
+对于B来说，它的prev指向head-node，因此会首先再尝试获取锁一次，如果失败，则会将head-node的waitStatus值为SIGNAL，下次循环的时候再去尝试获取锁，如果还是失败，且这个时候prev节点的waitStatus已经是SIGNAL，则这个时候线程会被通过LockSupport挂起。
 
 **五、唤醒恢复**
 
