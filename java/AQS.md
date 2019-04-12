@@ -15,3 +15,46 @@ AQS的等待队列基于一个双向链表实现的，head结点不关联线程�
 
 **三、入队列**
 
+我们依旧使用上述A，B，C线程的例子，从代码层面分析下入队列的过程
+```
+// Acquires lock in exclusive mode,ignoring interrupts.
+public final void acquire(int arg) {
+    if (!tryAcquire(arg) &&
+        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+        selfInterrupt();
+}
+
+//Creates and enqueues node for current thread and given mode.
+private Node addWaiter(Node mode) {
+    Node node = new Node(Thread.currentThread(), mode);
+    // Try the fast path of enq; backup to full enq on failure
+    Node pred = tail;
+    if (pred != null) {
+        node.prev = pred;
+        if (compareAndSetTail(pred, node)) {
+            pred.next = node;
+            return node;
+        }
+    }
+    enq(node);
+    return node;
+}
+
+//Inserts node into queue, initializing if necessary.
+private Node enq(final Node node) {
+    for (;;) {
+        Node t = tail;
+        if (t == null) { // Must initialize
+            if (compareAndSetHead(new Node()))
+                tail = head;
+        } else {
+            node.prev = t;
+            if (compareAndSetTail(t, node)) {
+                t.next = node;
+                return t;
+            }
+        }
+    }
+}
+```
+线程A一直没有释放锁的情况，B线程调用了上述acquire方法，继而会进入到addWaiter方法中，新建一个B-Node。初始情况下tail为Nil，所以线程B会直接进入enq方法中执行相关逻辑。enq内部是一层for的死循环（这里我们给它一个好听点的名字：自旋），第一次自旋会初始化队列，新建一个Node，此时head和tail都会指向Node结点。第二次自旋，程序进入else分支执行，会进行指针互换，继而构建出Head-Node到Tail-B-Node的队列。
