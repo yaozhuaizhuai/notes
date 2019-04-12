@@ -58,3 +58,31 @@ private Node enq(final Node node) {
 }
 ```
 线程A一直没有释放锁的情况，B线程调用了上述acquire方法，继而会进入到addWaiter方法中，新建一个B-Node。初始情况下tail为Nil，所以线程B会直接进入enq方法中执行相关逻辑。enq内部是一层for的死循环（这里我们给它一个好听点的名字：自旋），第一次自旋会初始化队列，新建一个Node，此时head和tail都会指向Node结点。第二次自旋，程序进入else分支执行，会进行指针互换，继而构建出Head-Node到Tail-B-Node的队列。
+
+**四、挂起等待**
+
+上面只是讲述了addWaiter的实现部分，那么节点入队列之后会继续发生什么呢？那就要看看acquireQueued是怎么实现的了，代码如下：
+```
+final boolean acquireQueued(final Node node, int arg) {
+    boolean failed = true;
+    try {
+        boolean interrupted = false;
+        for (;;) {
+            final Node p = node.predecessor();
+            if (p == head && tryAcquire(arg)) {
+                setHead(node);
+                p.next = null; // help GC
+                failed = false;
+                return interrupted;
+            }
+            if (shouldParkAfterFailedAcquire(p, node) &&
+                parkAndCheckInterrupt())
+                interrupted = true;
+        }
+    } finally {
+        if (failed)
+            cancelAcquire(node);
+    }
+}
+```
+我们依旧假设只有A，B，C三个线程并且A获取锁之后一直未释放，对于B来说，它的prev指向head-node，因此会首先再尝试获取锁一次，如果失败，则会将head-node的waitStatus值为SIGNAL，下次循环的时候再去尝试获取锁，如果还是失败，且这个时候prev节点的waitStatus已经是SIGNAL，则这个时候线程会被通过LockSupport挂起。
