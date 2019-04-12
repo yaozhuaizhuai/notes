@@ -61,7 +61,7 @@ private Node enq(final Node node) {
 
 **四、挂起等待**
 
-上面只是讲述了addWaiter的实现部分，那么节点入队列之后会继续发生什么呢？那就要看看acquireQueued是怎么实现的了，代码如下：
+上面只是讲述了addWaiter的实现部分，那么结点入队列之后会继续发生什么呢？那就要看看acquireQueued是怎么实现的了，代码如下：
 ```
 final boolean acquireQueued(final Node node, int arg) {
     boolean failed = true;
