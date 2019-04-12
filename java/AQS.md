@@ -86,3 +86,7 @@ final boolean acquireQueued(final Node node, int arg) {
 }
 ```
 我们依旧假设只有A，B，C三个线程并且A获取锁之后一直未释放，对于B来说，它的prev指向head-node，因此会首先再尝试获取锁一次，如果失败，则会将head-node的waitStatus值为SIGNAL，下次循环的时候再去尝试获取锁，如果还是失败，且这个时候prev节点的waitStatus已经是SIGNAL，则这个时候线程会被通过LockSupport挂起。
+
+**五、唤醒恢复**
+
+
